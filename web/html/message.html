@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leave a Message</title>
+    <link type="text/css" rel="stylesheet" href="../css/style.css">
+    <script type="text/javascript" src="../js/jquery/2.0.0/jquery.min.js"></script>
+    <style>
+        textarea{
+            height:200px;
+            width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+    <div>
+            <form action="/message" method="post" class="STYLE-NAME">
+                <h1>Message</h1>
+                <label for="message"></label>
+                <textarea id="message" name="message"></textarea>
+                <label>
+                    <span>&nbsp;</span>
+                    <input type="submit" id="submit" value="发送">
+                </label>
+            </form>
+
+    </div>
+
+</body>
+</html>

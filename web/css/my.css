@@ -1,0 +1,59 @@
+/*
+作者：陈文铭
+学号：150202102439
+班级：软件工程2班
+*/
+body {
+    background: whitesmoke;
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    width: 100%;
+    margin: 0 auto; /*设置整个容器在浏览器中水平居中*/
+    background: whitesmoke;
+}
+.header{
+    height: 80px;
+    background: seashell;
+}
+.header-p,.header-a,.hobby{
+    color: red;
+}
+.left {
+    background-color: cornflowerblue;
+    width: 20%;
+    height: 750px;
+    /*overflow: auto;*/
+    border: 1px solid #000;
+    float: left;
+    text-align: left;
+    color: white;
+}
+
+.right {
+    background-color: whitesmoke;
+    width: 78%;
+    height: 750px;
+    /*overflow: auto;*/
+    border: 1px solid #000;
+    float: right;
+    /*text-align: left;*/
+    color: cornflowerblue;
+}
+
+
+a {
+    text-decoration: none;
+    color: white;
+}
+.zhbit{
+    color: cornflowerblue;
+}
+img {
+    width: 120px;
+    height: 180px;
+    align-content: center;
+
+}

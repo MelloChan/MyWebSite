@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache"> <!--阻止脱机浏览-->
+    <meta http-equiv="cache-control" content="no-cache"> <!--//缓存清除-->
+    <meta http-equiv="expires" content="0">
+    <title>My-ChatRoom-注册</title>
+    <link type="text/css" rel="stylesheet" href="../css/style.css">
+    <script type="text/javascript" src="../js/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery/jquery.formvalidation.js"></script>
+</head>
+<body>
+<div class="page-container" id="main_register">
+    <div align="center">
+    <form action="/register" method="post" id="signUp-form" autocomplete="off">
+        <h1>Chat Room</h1>
+        <fieldset>
+            <div class="field-group">
+              <label for="name"></label>
+                <input class="required" type="text" id="name" name="username" placeholder="昵称" onblur="vailUserName()" >
+                <span id="checkUser" class="field-group"></span>
+            </div>
+            <div class="field-group">
+               <label for="password"></label>
+                <input class="required" type="password" id="password" name="password" placeholder="密码" onblur="vailPassword()">
+                <span id="checkPwd1" class="field-group"></span>
+            </div>
+            <div class="field-group">
+                <label for="confirm"></label>
+                <input class="required" type="password" id="confirm" name="confirm" placeholder="再次输入" onblur="vailRepassword()">
+                <span id="checkPwd2" class="field-group"></span>
+            </div>
+            <div class="field-group">
+                <label for="email"></label>
+                <input class="required" type="email" id="email" name="email" placeholder="邮箱" onblur="vailEmail()">
+                <span id="checkEmail" class="field-group"></span>
+            </div>
+            <div class="field-group">
+                <!--<button type="submit" class="submit" >注册</button>-->
+                <input type="submit" class="submit" id="submit" value="注册" onclick="return vailFrom()">
+                <span class="field-group"></span>
+            </div>
+        </fieldset>
+        <div>
+            <p>已有账户?<a href="login.html">登录</a>.</p>
+        </div>
+    </form>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#email").blur(function () {
+            var page = "/check";
+            var value = $(this).val();
+            $.ajax({
+                type: "post",
+                url: page,
+                data: {"email": value},
+                success: function (result) {
+                    if (result == "SUCCESS") {
+                        $("#submit").removeAttr("disabled");
+                    } else {
+                        $("#checkEmail").html("已被注册");
+                        $("#submit").attr("disabled","true");
+                    }
+                }
+            })
+        })
+    });
+</script>
+<script type="text/javascript">
+    function vailUserName() {
+        var name=$("#name").val();
+        var flag=true;
+        if(name==''){
+            $("#checkUser").html("昵称不能为空！");
+            flag=false;
+        }else{
+            $("#checkUser").html(" ");
+            flag=true;
+        }
+        return flag;
+
+    }
+    function vailPassword() {
+        var password=$("#password").val();
+        var flag=true;
+        if(password==''){
+            $("#checkPwd1").html("密码不能为空！");
+            flag=false;
+        }else if(password.length < 8) {
+            console.log(password.size+":"+password.length);
+            $("#checkPwd1").html("密码长度不能小于8！");
+            flag=false;
+        }else{
+            $("#checkPwd1").html(" ");
+            flag=true;
+        }
+        return flag;
+
+    }
+    function vailRepassword() {
+        var confirm=$("#confirm").val();
+        var password=$("#password").val();
+        var flag=true;
+        if(confirm!=password){
+            $("#checkPwd2").html("两次输入的密码不一致！")
+            flag=false;
+        }else{
+            $("#checkPwd2").html(" ");
+            flag=true;
+        }
+        return flag;
+    }
+    function vailEmail() {
+        var email=$("#email").val();
+        var flag=true;
+        if(email==''){
+            $("#checkEmail").html("邮箱不能为空！");
+            flag =false;
+        }else if(email.indexOf('@')<0&& email.indexOf('.')<0){
+            $("#checkEmail").html("邮箱格式有误！");
+            flag=false;
+        } else{
+            $("#checkEmail").html(" ");
+            flag=true;
+        }
+        return flag;
+    }
+
+    function vailFrom() {
+        return !!(vailUserName() && vailPassword() && vailEmail()&&vailRepassword());
+    }
+</script>
+</body>
+</html>

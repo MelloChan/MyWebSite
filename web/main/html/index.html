@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Root</title>
+    <script type="application/javascript" src="../../js/jquery/2.0.0/jquery.min.js"></script>
+    <script type="application/javascript" src="../../js/WebSocket.js"></script>
+</head>
+<body>
+<div id="skm_LockPane" class="LockOff"></div>
+<form id="form1">
+    <h1>Chat Room</h1>
+    <br/>
+
+    服务器地址:<input type="text" id="Connection" /> 用户名：<input type="text" id="txtName" value="Mello"/>
+    <button id='ToggleConnection' type="button" onclick='ToggleConnectionClicked();'>连接</button>
+    <br />
+    <br />
+    <div id='LogContainer' class='container'></div>
+    <br />
+    <div id='SendDataContainer'>
+        <input type="text" id="DataToSend" size="88" />
+        <button id='SendData' type="button" onclick='SendDataClicked();'>发送</button>
+    </div>
+    <br />
+</form>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="checkEmail"></div>
+<input type="text" id="email" name="email">
+</body>
+<script type="text/javascript" src="../js/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#email").keyup(function () {
+            var page="/check";
+            var value=$(this).val();
+            $.ajax(
+                    {
+                        url:page,
+                        data:{"email":value},
+                        success:function (result) {
+                            $("#checkEmail").html(result)
+                        },
+                        error:alert("发送错误!")
+                    }
+            )
+        })
+    })
+</script>
+</html>
