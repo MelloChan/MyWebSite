@@ -13,9 +13,9 @@ import java.util.Properties;
  */
 public class SendEmail {
     private static final String smtp = "smtp.163.com";
-    private static final String serverMail = "13192265851@163.com";
-    private static final String serverPassword = "123456789Mello";
-    private static final String myEmail = "352983198@qq.com";
+    private static final String serverMail = "";
+    private static final String serverPassword = "";
+    private static final String myEmail = "";
     private static final String TITLE = "新留言";
 
     public static void sendMail(String message) throws GeneralSecurityException, MessagingException {
