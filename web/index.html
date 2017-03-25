@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base target="_blank" />
     <meta name="keywords" content="技术,音乐,小说,ACG,与你分享"/>
     <meta charset="UTF-8">
     <meta http-equiv="pragma" content="no-cache"> <!--阻止脱机浏览-->
@@ -15,20 +16,20 @@
 
 <div id="mainwrap">
     <div class="header">
-        <span class="tagline"><a href="/html/login.html" title="点击登录" target="_blank">登录&ensp;</a></span>
-        <span class="tagline"><a href="/html/register.html" title="点击注册" target="_blank">&ensp;注册&ensp;</a></span>
-        <span class="tagline"><a href="http://mellochan.github.io" title="我的博客" target="_blank">&ensp;我的博客&ensp;</a></span>
-        <span class="tagline"><a href="/main/html/main.html" title="聊天室" target="_blank">&ensp;聊天室&ensp;</a></span>
-        <span class="tagline"><a href="#" title="个人简历" target="_blank">&ensp;自白&ensp;</a></span>
+        <span class="tagline"><a href="/html/login.html" title="点击登录">登录&ensp;</a></span>
+        <span class="tagline"><a href="/html/register.html" title="点击注册">&ensp;注册&ensp;</a></span>
+        <span class="tagline"><a href="http://mellochan.github.io/html/index.html" title="我的博客">&ensp;我的博客&ensp;</a></span>
+        <span class="tagline"><a href="/main/html/main.html" title="聊天室">&ensp;聊天室&ensp;</a></span>
+        <span class="tagline"><a href="#" title="个人简历[待完善]">&ensp;自白&ensp;</a></span>
     </div>
     <div id="cardstyle">
         <div id="menuwrap">
             <ul id="iconmenu">
                 <li><a href="#bio" title="关于我"><img src="images/icons/bio.gif" alt="关于我"/></a></li>
-                <li><a href="#portfolio" title="技术"><img src="images/icons/technology.gif" alt="技术"/></a></li>
-                <li><a href="#social" title="音乐"><img src="images/icons/music.gif" alt="音乐"/></a></li>
-                <li><a href="#custom" title="小说"><img src="images/icons/novel.gif" alt="小说"/></a></li>
-                <li><a href="#contact" title="ACG"><img src="images/icons/acg.gif" alt="ACG"/></a></li>
+                <li><a href="#technology" title="技术"><img src="images/icons/technology.gif" alt="技术"/></a></li>
+                <li><a href="#music" title="音乐"><img src="images/icons/music.gif" alt="音乐"/></a></li>
+                <li><a href="#novel" title="小说"><img src="images/icons/novel.gif" alt="小说"/></a></li>
+                <li><a href="#ACG" title="ACG"><img src="images/icons/acg.gif" alt="ACG"/></a></li>
                 <li><a href="#start" title="分享"><img src="images/icons/start.gif" alt="分享"/></a></li>
             </ul>
         </div>
@@ -40,38 +41,59 @@
                         <h2>关于我</h2>
                         <img class="left" src="images/me.jpg" alt="Sample photo"/>
                         <p>理想:当一名安安静静的Java程序员.</p>
-                        <p>目标:家人、技术、音乐、小说、动漫.</p>
+                        <p>目标:家人、技术、音乐、小说、ACG.</p>
                         <p>现实:或许很难,但我在路上,在努力.</p>
                         <a href="html/message.html" title="点我:测试用例"><p>匿名留个言呗</p></a>
                     </li>
 
-                    <li id="portfolio" class="section">
+                    <li id="technology" class="section">
                         <h2>技术</h2>
-                        <ul class="poptroxactive">
-
+                        <ul>
+                            <li><a href="https://developers.google.cn/" title="谷歌中国开发者平台"><img src="images/icons/chromet.png">
+                                <strong>Google Developers</strong>
+                            </a></li>
+                            <li><a href="https://github.com/" title="开源仓库"><img src="images/icons/github.png">
+                                <strong>GitHub</strong>
+                            </a></li>
+                            <li><a href="https://www.ibm.com/developerworks/cn/" title="IBM Java Developer"><img src="images/icons/ibm.png">
+                                <strong>IBM</strong>
+                            </a></li>
+                            <li><a href="https://yq.aliyun.com/" title="云栖社区"><img src="images/icons/aliyun.png">
+                                <strong>云栖社区</strong>
+                            </a></li>
+                            <li><a href="http://blog.csdn.net/" title="博客频道"><img src="images/icons/csdn.png">
+                                <strong>CSDN博客</strong>
+                            </a></li>
+                            <li><a href="http://www.oschina.net/" title="开源中国"><img src="images/icons/osChina.png">
+                                <strong>开源中国</strong>
+                            </a></li>
                         </ul>
                     </li>
 
-                    <li id="social" class="section">
+                    <li id="music" class="section">
                         <h2>音乐</h2>
                         <ul>
 
                         </ul>
                     </li>
 
-                    <li id="custom" class="section">
+                    <li id="novel" class="section">
                         <h2>小说</h2>
 
                     </li>
 
-                    <li id="contact" class="section">
-                        <h2>ACG</h2>
-                        <div id="address">
-
-                        </div>
-                        <div id="map">
-                            <img src="">
-                        </div>
+                    <li id="ACG" class="section">
+                        <h2>动画</h2>
+                        <!--视频-->
+                        <video controls autoplay width="575" height="245" id="animation">
+                            <source src="video/LoveYou.mp4">
+                        </video>
+                        <!--<div id="address">-->
+                            <!---->
+                        <!--</div>-->
+                        <!--<div id="map">-->
+                            <!--<img src="">-->
+                        <!--</div>-->
                     </li>
                     <li id="start" class="section">
                         <h2>结语</h2>
@@ -89,16 +111,35 @@
     </div>
 
 </div>
-<div style="display: none">
-    <audio controls="controls" autoplay="autoplay">
-        <source src="audio/Top%20of%20the%20world.mp3">
-        <source src="audio/I%20Am%20Not%20Alone.mp3">
-    </audio>
-</div>
+<!--<div style="display: none">-->
+<!--音频-->
+    <!--<audio controls autoplay >-->
+        <!--<source src="audio/Top%20of%20the%20world.mp3">-->
+        <!--<source src="audio/I%20Am%20Not%20Alone.mp3">-->
+    <!--</audio>-->
+<!--</div>-->
 <!--<script type="text/javascript">-->
     <!--$("#poptroxactive").each(function() {-->
         <!--$(this).poptrox();-->
     <!--});-->
 <!--</script>-->
+<script type="application/javascript">
+    var vList = ['video/Dream.mp4', 'video/LoveYou.mp4', 'video/Memory.mp4']; // 初始化播放列表
+    var vLen = vList.length; // 播放列表的长度
+    var curr = 0; // 当前播放的视频
+    var video = document.getElementById("animation");
+    video.addEventListener('ended', play);
+    play();
+    function play(e) {
+        video.src = vList[curr];
+        video.load();
+        video.play();
+        curr++;
+        if(curr >= vLen){
+            curr = 0; // 播放完了，重新播放
+        }
+
+    }
+</script>
 </body>
 </html>
