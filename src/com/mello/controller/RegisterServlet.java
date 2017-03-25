@@ -2,6 +2,7 @@ package com.mello.controller;
 
 import com.mello.entity.User;
 import com.mello.service.impl.UserServiceImpl;
+import com.mello.util.ActiveCode;
 import com.mello.util.DigestUtil;
 
 import javax.servlet.ServletException;
@@ -28,7 +29,8 @@ public class RegisterServlet extends HttpServlet {
         User user = getUserInfo(req);
         boolean flag = new UserServiceImpl().register(user);
         if (flag) {
-            resp.sendRedirect("/html/login.html");
+//            resp.sendRedirect("/html/login.html");
+            resp.sendRedirect("/activeEmail");
             return;
         }
         resp.sendRedirect("/html/error.html");
@@ -42,6 +44,8 @@ public class RegisterServlet extends HttpServlet {
         user.setEmail(request.getParameter("email"));
         user.setRegistrationTime(new Date(System.currentTimeMillis()));
         user.setIp(request.getRemoteAddr());
+        user.setActivation("0");
+        user.setActivationCode(ActiveCode.getCode());
         return user;
     }
 }

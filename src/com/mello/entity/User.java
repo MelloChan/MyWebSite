@@ -12,6 +12,8 @@ public class User {
     private String email;
     private Date registrationTime;
     private String ip;
+    private String activation;
+    private String activationCode;
 
     public Integer getId() {
         return id;
@@ -61,15 +63,33 @@ public class User {
         this.ip = ip;
     }
 
+    public String getActivation() {
+        return activation;
+    }
+
+    public void setActivation(String activation) {
+        this.activation = activation;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", registrationTime=" + registrationTime +
                 ", ip='" + ip + '\'' +
+                ", activation='" + activation + '\'' +
+                ", activationCode='" + activationCode + '\'' +
                 '}';
     }
 }

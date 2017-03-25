@@ -23,6 +23,11 @@ import java.io.UnsupportedEncodingException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        boolean isActivation="0".equals(VerifyUtil.getActivation());
+        if(isActivation){
+            req.getRequestDispatcher("/html/active.html").forward(req,resp);
+            return;
+        }
         boolean flag = verifyUser(req, resp);
         if (flag) {
             resp.sendRedirect("/main/html/main.html");
@@ -51,7 +56,7 @@ public class LoginServlet extends HttpServlet {
         }
         String email = user.getEmail();
         String password = user.getPassword();
-        boolean flag = new UserServiceImpl().LoginVerify(email, password);
+        boolean flag = new UserServiceImpl().loginVerify(email, password);
         if (flag) {
             user.setUsername(VerifyUtil.getUsername());
             HttpSession session = request.getSession();

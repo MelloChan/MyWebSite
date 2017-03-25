@@ -1,13 +1,15 @@
-package com.mello.dao.impl;
+﻿package com.mello.dao.impl;
 
 import com.mello.dao.UserDAO;
 import com.mello.entity.User;
+import com.mello.util.ActiveCode;
 import com.mello.util.ConnectionFactory;
 import com.mello.util.VerifyUtil;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.sql.*;
 import java.util.List;
+import java.util.SimpleTimeZone;
 
 /**
  * Created by Administrator on 2017/3/7.
@@ -25,8 +27,8 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public void insert(User user) throws SQLException {
-        String sql = "insert into " + DBT + "(id,username,password,email,registrationTime,ip)" +
-                "values(null,?,?,?,?,?)";
+        String sql = "insert into " + DBT + "(id,username,password,email,registrationTime,ip,activation,activationCode) " +
+                "values(null,?,?,?,?,?,?,?) ";
         Connection connection = ConnectionFactory.getInstance().getConnection();
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, user.getUsername());
@@ -34,12 +36,18 @@ public class UserDAOImpl implements UserDAO {
         ps.setString(3, user.getEmail());
         ps.setDate(4, user.getRegistrationTime());
         ps.setString(5, user.getIp());
+        ps.setString(6,user.getActivation());
+        ps.setString(7, user.getActivationCode());
         ps.execute();
         ResultSet rs = ps.getGeneratedKeys();
         if (null != rs) {
             while (rs.next()) {
                 int id = rs.getInt(1);
                 user.setId(id);
+                VerifyUtil.setId(user.getId());
+                VerifyUtil.setEmail(user.getEmail());
+                VerifyUtil.setActivation(user.getActivation());
+                VerifyUtil.setActivationCode(user.getActivationCode());
             }
         }
     }
@@ -62,6 +70,24 @@ public class UserDAOImpl implements UserDAO {
         ps.setString(1, username);
         ps.setString(2, password);
         ps.setInt(3, id);
+        ps.execute();
+    }
+
+    /**
+     * 用户通过邮件url激活时调用
+     * @param id 用户id
+     * @param activation 用户状态
+     * @param activationCode 用户激活码
+     * @throws SQLException
+     */
+    @Override
+    public void updateStatus(Integer id,String activation,String activationCode)throws SQLException{
+        String sql="update "+DBT+" set activation=?,activationCode=? where id=? ";
+        Connection connection=ConnectionFactory.getInstance().getConnection();
+        PreparedStatement ps=connection.prepareStatement(sql);
+        ps.setString(1,activation);
+        ps.setString(2,activationCode);
+        ps.setInt(3,id);
         ps.execute();
     }
 
@@ -156,12 +182,5 @@ public class UserDAOImpl implements UserDAO {
         return null;
     }
 
-    public static void main(String[] args) {
-        try {
-            System.out.println(new UserDAOImpl().search("352983199@qq.com") != null);
-            System.out.println(new UserDAOImpl().search("352983199@qq.com", "nFqJ0o6c4e4yTbUh8GO8Yw==") != null);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+  
 }

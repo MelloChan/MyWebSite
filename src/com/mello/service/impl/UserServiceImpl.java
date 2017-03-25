@@ -4,7 +4,11 @@ import com.mello.dao.UserDAO;
 import com.mello.dao.impl.UserDAOImpl;
 import com.mello.entity.User;
 import com.mello.service.UserService;
+import com.mello.util.SendEmail;
+import com.mello.util.VerifyUtil;
 
+import javax.mail.MessagingException;
+import java.security.GeneralSecurityException;
 import java.sql.SQLException;
 
 /**
@@ -24,6 +28,7 @@ public class UserServiceImpl implements UserService {
         boolean flag = false;
         try {
             userDAO.insert(user);
+//            SendEmail.sendMail(2,"恭喜您注册成功!请点击链接激活您的账户！");
             flag = true;
         } catch (SQLException e) {
             System.out.println("插入异常:" + e.getMessage());
@@ -38,13 +43,26 @@ public class UserServiceImpl implements UserService {
      * @return 成功与否
      */
     @Override
-    public Boolean InfoUpdate(User user) {
+    public Boolean infoUpdate(User user) {
         boolean flag = false;
         try {
             userDAO.update(user);
             flag = true;
         } catch (SQLException e) {
             System.out.println("更新异常:" + e.getMessage());
+        }
+        return flag;
+    }
+
+    @Override
+    public Boolean statusUpdate(Integer id, String activation, String activationCode) {
+        boolean flag = false;
+        try {
+            userDAO.updateStatus(id, activation, activationCode);
+            flag = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("更新账户状态失败:" + e.getMessage());
         }
         return flag;
     }
@@ -57,7 +75,7 @@ public class UserServiceImpl implements UserService {
      * @return 成功与否
      */
     @Override
-    public Boolean LoginVerify(String email, String password) {
+    public Boolean loginVerify(String email, String password) {
         User user = null;
         try {
             user = userDAO.search(email, password);
@@ -74,7 +92,7 @@ public class UserServiceImpl implements UserService {
      * @return 成功与否
      */
     @Override
-    public Boolean EmailVerify(String email) {
+    public Boolean emailVerify(String email) {
         User user = null;
         try {
             user = userDAO.search(email);
@@ -84,9 +102,35 @@ public class UserServiceImpl implements UserService {
         return user == null;
     }
 
-    public static void main(String[] args) {
-        UserServiceImpl userService = new UserServiceImpl();
-        System.out.println(userService.EmailVerify("35298319@qq.com"));
+    /**
+     * 发送访问者留言
+     *
+     * @return 是否正确发送
+     */
+    @Override
+    public void sendMessage(Integer index, String message) {
+        try {
+            SendEmail.sendMailByText(index, message);
+        } catch (GeneralSecurityException | MessagingException e) {
+            e.printStackTrace();
+            System.out.println("发送邮件异常:" + e.getMessage());
+        }
+    }
 
+    /**
+     * 提供邮件激活账户
+     *
+     * @param index   标题索引
+     * @param message 发送的信息
+     * @param email   接收者
+     */
+    @Override
+    public void sendMessage(Integer index, String message, String email) {
+        try {
+            SendEmail.sendMailByHtml(index, message, email);
+        } catch (GeneralSecurityException | MessagingException e) {
+            e.printStackTrace();
+            System.out.println("发送邮件异常:" + e.getMessage());
+        }
     }
 }

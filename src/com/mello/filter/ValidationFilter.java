@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Created by Administrator on 2017/2/26.
@@ -25,9 +26,14 @@ public class ValidationFilter implements Filter {
         String email = VerifyUtil.getEmail();
         System.out.println(email);
         boolean flag = SessionListener.hasSession(email);
+        String activation=VerifyUtil.getActivation();
         System.out.println("ValidationFilter:" + flag);
         if (!flag) {
             response.sendRedirect("/html/login.html");
+            return;
+        }
+        if("0".equals(activation)){
+            servletRequest.getRequestDispatcher("/html/active.html").forward(servletRequest,servletResponse);
             return;
         }
         filterChain.doFilter(servletRequest, servletResponse);

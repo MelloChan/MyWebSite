@@ -9,9 +9,15 @@ import com.mello.entity.User;
 public interface UserService {
     Boolean register(User user);
 
-    Boolean InfoUpdate(User user);
+    Boolean infoUpdate(User user);
 
-    Boolean LoginVerify(String email, String password);
+    Boolean statusUpdate(Integer id, String activation, String activationCode);
 
-    Boolean EmailVerify(String email);
+    Boolean loginVerify(String email, String password);
+
+    Boolean emailVerify(String email);
+
+    void sendMessage(Integer index, String message);
+
+    void sendMessage(Integer index, String message, String email);
 }

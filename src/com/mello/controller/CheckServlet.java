@@ -22,7 +22,7 @@ public class CheckServlet extends HttpServlet {
         System.out.println(email);
         resp.setContentType("text/plain;charset=utf-8");
         try (PrintWriter pw = resp.getWriter()) {
-            boolean flag = new UserServiceImpl().EmailVerify(email);
+            boolean flag = new UserServiceImpl().emailVerify(email);
             if (flag) {
                 pw.print("SUCCESS");
             } else {

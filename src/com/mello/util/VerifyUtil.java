@@ -9,6 +9,8 @@ public class VerifyUtil {
     private static Integer id;
     private static String email;
     private static String username;
+    private static String activation;
+    private static String activationCode;
 
     public static void setId(Integer id) {
         VerifyUtil.id = id;
@@ -32,5 +34,21 @@ public class VerifyUtil {
 
     public static void setUsername(String username) {
         VerifyUtil.username = username;
+    }
+
+    public static String getActivation() {
+        return activation;
+    }
+
+    public static void setActivation(String activation) {
+        VerifyUtil.activation = activation;
+    }
+
+    public static String getActivationCode() {
+        return activationCode;
+    }
+
+    public static void setActivationCode(String activationCode) {
+        VerifyUtil.activationCode = activationCode;
     }
 }

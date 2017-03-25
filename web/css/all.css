@@ -204,11 +204,11 @@ p.tagline {
     right: 1em;
 }
 
-#social ul {
+#technology ul {
     padding: 2px 0;
 }
 
-#social li {
+#technology li {
     display: block;
     float: left;
     height: 46px;
@@ -217,7 +217,7 @@ p.tagline {
     width: 252px;
 }
 
-#social li a {
+#technology li a {
     color: #666;
     display: block;
     float: left;
@@ -227,17 +227,17 @@ p.tagline {
     width: 252px;
 }
 
-#social li a:hover, #social li a:focus {
+#technology li a:hover, #technology li a:focus {
     color: #333;
     text-decoration: none;
 }
 
-#social img {
+#technology img {
     float: left;
     margin: 0 16px 0 10px;
 }
 
-#social strong {
+#technology strong {
     color: #333;
     display: block;
     font-size: 14px;
