@@ -96,23 +96,4 @@ public class WebSocket extends WebSocketServer {
 // 向在线用户发送当前用户退出的消息
         }
     }
-
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println("开始启动WebSocket");
-        WebSocketImpl.DEBUG = false;
-        int port = 8888;
-        // 端口随便设置，只要不跟现有端口重复就可以
-        WebSocket s = null;
-        try {
-            s = new WebSocket(port);
-        } catch (UnknownHostException e) {
-            System.out.println("启动WebSocket失败！");
-            e.printStackTrace();
-        }
-        assert s != null;
-        s.start();
-        System.out.println("启动WebSocket成功！");
-
-    }
-
 }
