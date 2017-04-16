@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<p><a href="/signOut">Sign Out</a></p>
+<p><a href="/ws/signOut">Sign Out</a></p>
 </body>
 
 </html>

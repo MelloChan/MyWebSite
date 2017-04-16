@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="application/javascript" src="../../js/jquery/2.0.0/jquery.min.js"></script>
+    <title>成绩</title>
+</head>
+<body>
+<div>
+
+</div>
+<script type="application/javascript">
+    (function () {
+                $.ajax({
+                    url: "/api/jwxt/results",
+                    success: function (result) {
+                        if (result) {
+                            $("#txtName").html(result);
+                            name = result;
+
+                        } else {
+                            alert("请先登录撒~(๑°ㅁ°๑)‼");
+                            top.location = '/html/login.html';
+                        }
+
+                    }
+
+                });
+            }()
+    );
+</script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -17,7 +18,7 @@
             border: 1px solid black;
         }
 
-        .LockOff {
+        .lockOff {
             display: none;
             visibility: hidden;
         }
@@ -40,7 +41,7 @@
     </style>
     <script type="text/javascript">
         var ws;
-        var SocketCreated = false;
+        var socketCreated = false;
         var isUserloggedout = false;
         var name = "";
         function lockOn(str) {
@@ -56,10 +57,10 @@
             lock.className = 'LockOff';
         }
 
-        function ToggleConnectionClicked() {
-            if (SocketCreated && (ws.readyState == 0 || ws.readyState == 1)) {
+        function toggleConnectionClicked() {
+            if (socketCreated && (ws.readyState == 0 || ws.readyState == 1)) {
                 lockOn("离开聊天室");
-                SocketCreated = false;
+                socketCreated = false;
                 isUserloggedout = true;
                 ws.close();
             } else {
@@ -73,67 +74,70 @@
                         ws = new MozWebSocket("ws://"+ location.host + ":8888/");
                     }
 
-                    SocketCreated = true;
+                    socketCreated = true;
                     isUserloggedout = false;
                 } catch (ex) {
                     Log(ex, "ERROR");
                     return;
                 }
-                $("#ToggleConnection").html("断开");
-                ws.onopen = WSonOpen;
-                ws.onmessage = WSonMessage;
-                ws.onclose = WSonClose;
-                ws.onerror = WSonError;
+                $("#toggleConnection").html("断开");
+                ws.onopen = wSonOpen;
+                ws.onmessage = wSonMessage;
+                ws.onclose = wSonClose;
+                ws.onerror = wSonError;
             }
         }
 
+        function closeConnection() {
+            ws.onclose(event);
+        }
 
-        function WSonOpen() {
+        function wSonOpen() {
             lockOff();
             Log("连接已经建立", "OK");
-            $("#SendDataContainer").show();
+            $("#sendDataContainer").show();
             ws.send(name);
         }
 
 
-        function WSonMessage(event) {
+        function wSonMessage(event) {
             Log(event.data);
         }
 
-        function WSonClose() {
+        function wSonClose() {
             lockOff();
             if (isUserloggedout) {
                 Log("[" + name + "]离开了聊天室");
-                $('#ToggleConnection').html("连接");
-                $('#SendDataContainer').hide();
+                $('#toggleConnection').html("连接");
+                $('#sendDataContainer').hide();
             }
 
 
         }
-        function WSonError() {
+        function wSonError() {
             lockOff();
             Log("远程连接中断", "ERROR");
         }
 
-        function SendDataClicked() {
-            var data = $("#DataToSend").val().trim();
+        function sendDataClicked() {
+            var data = $("#dataToSend").val().trim();
             if (data != "") {
                 ws.send(name + ":\"" + data + "\"");
-                document.getElementById("DataToSend").value = "";
+                document.getElementById("dataToSend").value = "";
             }
         }
 
         function Log(Text, MessageType) {
             if (MessageType == "OK") Text = "<span style='color: green;'>" + Text + "</span>";
             if (MessageType == "ERROR") Text = "<span style='color: red;'>" + Text + "</span>";
-            document.getElementById("LogContainer").innerHTML = document.getElementById("LogContainer").innerHTML + Text + "<br />";
-            var LogContainer = document.getElementById('LogContainer');
-            LogContainer.scrollTop = LogContainer.scrollHeight;
+            document.getElementById("logContainer").innerHTML = document.getElementById("logContainer").innerHTML + Text + "<br />";
+            var logContainer = document.getElementById('logContainer');
+            logContainer.scrollTop = logContainer.scrollHeight;
         }
 
         (function () {
                     $.ajax({
-                        url: "/username",
+                        url: "/ws/username",
                         success: function (result) {
                             if (result) {
                                 $("#txtName").html(result);
@@ -150,7 +154,7 @@
                 }()
         );
         $(document).ready(function () {
-            $("#SendDataContainer").hide();
+            $("#sendDataContainer").hide();
             var WebSocketsExist = true;
             try {
                 var dummy = new WebSocket("ws://" + location.host + ":8888/");
@@ -165,13 +169,15 @@
 
             if (WebSocketsExist) {
                 Log("您的浏览器支持WebSocket<(￣ˇ￣)/，尝试连接到聊天服务器吧~", "OK");
+                dummy.close();
+
             } else {
                 Log("您的浏览器不支持WebSocket(。・＿・。)ﾉ，选择其他的浏览器再尝试连接服务器嗟~", "ERROR");
-                document.getElementById("ToggleConnection").disabled = true;
+                document.getElementById("toggleConnection").disabled = true;
             }
-            $("#DataToSend").keypress(function (evt) {
+            $("#dataToSend").keypress(function (evt) {
                 if (evt.keyCode == 13) {
-                    $("#SendData").click();
+                    $("#sendData").click();
                     evt.preventDefault();
                 }
             })
@@ -180,33 +186,33 @@
     </script>
 </head>
 <body>
-<div id="skm_LockPane" class="LockOff"></div>
+<div id="skm_LockPane" class="lockOff"></div>
 <form id="form1">
     <h1>Chat Room</h1>
     <br/>
     用户名：<label for="txtName"></label><span id="txtName" class="txtName"></span><br><hr>
-    <button id='ToggleConnection' type="button" onclick='ToggleConnectionClicked();'>连接</button>
-    <a href="/signOut">
-        <button type="button">退出</button>
+    <button id="toggleConnection" type="button" onclick='toggleConnectionClicked();'>连接</button>
+    <a href="/ws/signOut">
+        <button id="closeConnection" onclick="closeConnection()" type="button">退出</button>
     </a>
     <br/>
     <br/>
-    <div id='LogContainer' class='container'></div>
+    <div id="logContainer" class='container'></div>
     <br/>
-    <div id='SendDataContainer'>
-        <input type="text" id="DataToSend" class="DataToSend" size="88"/>
-        <button id='SendData' type="button" onclick='SendDataClicked();'>发送</button>
+    <div id="sendDataContainer">
+        <label for="dataToSend"></label><input type="text" id="dataToSend" class="dataToSend" size="88"/>
+        <button id="sendData" type="button" onclick='sendDataClicked();'>发送</button>
     </div>
     <br/>
 </form>
 
-<div style="display: none">
-    <audio controls="controls" autoplay="autoplay">
-        <source src="../../audio/LET%20IT%20OUT.mp3">
-        <source src="../../audio/I%20Am%20Not%20Alone.mp3">
+<!--<div style="display: none">-->
+    <!--<audio controls="controls" autoplay="autoplay">-->
+        <!--<source src="../../audio/LET%20IT%20OUT.mp3">-->
+        <!--<source src="../../audio/I%20Am%20Not%20Alone.mp3">-->
 
-    </audio>
-</div>
+    <!--</audio>-->
+<!--</div>-->
 
 </body>
 </html>

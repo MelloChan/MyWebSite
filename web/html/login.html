@@ -3,9 +3,6 @@
 <head>
 
     <meta charset="utf-8">
-    <meta http-equiv="pragma" content="no-cache"> <!--阻止脱机浏览-->
-    <meta http-equiv="cache-control" content="no-cache"> <!--//缓存清除-->
-    <meta http-equiv="expires" content="0">
     <title>ChatRoom Login</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -14,7 +11,7 @@
 <div class="page-container" >
     <!--<div align="center">-->
         <h1>Chat Room</h1>
-        <form action="/login" method="post" >
+        <form action="/ws/login" method="post" >
            <div>
                <input type="email" name="email" class="email" placeholder="邮箱" autocomplete="off">
            </div>
