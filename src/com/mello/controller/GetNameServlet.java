@@ -13,8 +13,9 @@ import java.io.PrintWriter;
 
 /**
  * Created by Administrator on 2017/3/17.
+ * 获取用户昵称
  */
-@WebServlet(name = "GetNameServlet", urlPatterns = {"/username"})
+@WebServlet(name = "GetNameServlet", urlPatterns = {"/ws/username"})
 public class GetNameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

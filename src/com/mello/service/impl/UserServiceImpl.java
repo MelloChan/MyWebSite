@@ -5,7 +5,6 @@ import com.mello.dao.impl.UserDAOImpl;
 import com.mello.entity.User;
 import com.mello.service.UserService;
 import com.mello.util.SendEmail;
-import com.mello.util.VerifyUtil;
 
 import javax.mail.MessagingException;
 import java.security.GeneralSecurityException;
@@ -13,6 +12,7 @@ import java.sql.SQLException;
 
 /**
  * Created by Administrator on 2017/2/26.
+ * 个人聊天室用户服务类
  */
 public class UserServiceImpl implements UserService {
     private static UserDAO userDAO = new UserDAOImpl();
@@ -28,7 +28,6 @@ public class UserServiceImpl implements UserService {
         boolean flag = false;
         try {
             userDAO.insert(user);
-//            SendEmail.sendMail(2,"恭喜您注册成功!请点击链接激活您的账户！");
             flag = true;
         } catch (SQLException e) {
             System.out.println("插入异常:" + e.getMessage());
@@ -109,12 +108,17 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void sendMessage(Integer index, String message) {
-        try {
-            SendEmail.sendMailByText(index, message);
-        } catch (GeneralSecurityException | MessagingException e) {
-            e.printStackTrace();
-            System.out.println("发送邮件异常:" + e.getMessage());
-        }
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        SendEmail.sendMailByText(index, message);
+                    } catch (GeneralSecurityException | MessagingException e) {
+                        e.printStackTrace();
+                        System.out.println("发送邮件异常:" + e.getMessage());
+                    }
+                }
+            }).start();
     }
 
     /**
@@ -126,11 +130,15 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void sendMessage(Integer index, String message, String email) {
-        try {
-            SendEmail.sendMailByHtml(index, message, email);
-        } catch (GeneralSecurityException | MessagingException e) {
-            e.printStackTrace();
-            System.out.println("发送邮件异常:" + e.getMessage());
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    SendEmail.sendMailByHtml(index, message, email);
+                } catch (GeneralSecurityException | MessagingException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }

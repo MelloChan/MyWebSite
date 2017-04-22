@@ -17,7 +17,7 @@ import java.sql.Date;
  * Created by Administrator on 2017/2/26.
  * 处理用户注册程序
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/ws/register"})
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class RegisterServlet extends HttpServlet {
         boolean flag = new UserServiceImpl().register(user);
         if (flag) {
 //            resp.sendRedirect("/html/login.html");
-            resp.sendRedirect("/activeEmail");
+            resp.sendRedirect("/ws/activeEmail");
             return;
         }
         resp.sendRedirect("/html/error.html");

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>绑定教务</title>
+    <script type="application/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/jkx.css">
+    <script type="application/javascript" src="http://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+</head>
+<body>
+
+<div class="main-div" style="padding: 20px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <form class="form-horizontal" id="frm1">
+                    <span class="heading">绑定教务</span>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="number" name="number" placeholder="学  号">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="form-group help">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="密  码">
+                        <i class="fa fa-lock"></i>
+                    </div>
+                    <div class="form-group submit">
+                        <button class="btn btn-lg btn-info btn-block" id="sub">绑定</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="text-align:center;">
+    <p><a href="#" target="_blank" class="jkx">© 2010-2017 北理珠计科协</a></p>
+</div>
+<script>
+    $("#sub").click(function (e) {
+        e.preventDefault();
+        var regByNumber = /^\d{12}$/;
+        var number = $("#number").val().trim();
+        if ((number == null) || (number.length < 12 || !((regByNumber.test(number))))) {
+            alert("学号有误！");
+            return;
+        }
+        var password = $("#password").val();
+        if ((password == null) || (password.length < 8)) {
+            alert("密码有误！");
+            return;
+        }
+        ajaxBind();
+    });
+
+    function ajaxBind() {
+        var number=$("#number").val();
+        var password=$("#password").val();
+        $.ajax({
+            type: 'POST',
+            url: '/api/jwxt/studentBind',
+            data: {'number': number, 'password': password},
+            cache: false,
+            success: function (results) {
+                if (results == 'SUCCESS') {
+                    alert("绑定成功!若需要解绑,请在公众号回复解绑!");
+                } else if(results=='FAILURE'){
+                    alert("绑定失败!账户或密码有误!");
+                }else{
+                    alert("你已经绑定过了，重新绑定请先解绑【公众号回复解绑】");
+                }
+            },
+            error: function () {
+                alert("(。﹏。)~系统出错了，请联系公众号!");
+            }
+        });
+    }
+</script>
+</body>
+</html>

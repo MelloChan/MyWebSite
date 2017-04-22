@@ -7,6 +7,7 @@ import java.util.UUID;
  * 生成唯一的uuid
  */
 public class ActiveCode {
+    private ActiveCode(){}
     public static String getCode() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString().replaceAll("-", "");

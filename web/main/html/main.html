@@ -168,9 +168,8 @@
             }
 
             if (WebSocketsExist) {
-                Log("您的浏览器支持WebSocket<(￣ˇ￣)/，尝试连接到聊天服务器吧~", "OK");
                 dummy.close();
-
+                Log("您的浏览器支持WebSocket<(￣ˇ￣)/，尝试连接到聊天服务器吧~", "OK");
             } else {
                 Log("您的浏览器不支持WebSocket(。・＿・。)ﾉ，选择其他的浏览器再尝试连接服务器嗟~", "ERROR");
                 document.getElementById("toggleConnection").disabled = true;

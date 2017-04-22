@@ -12,12 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 /**
  * Created by Administrator on 2017/3/24.
  */
-@WebServlet(name = "ActiveEmailServlet", urlPatterns = {"/activeEmail"})
+@WebServlet(name = "ActiveEmailServlet", urlPatterns = {"/ws/activeEmail"})
 public class ActiveEmailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,30 +25,25 @@ public class ActiveEmailServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String urlMessage = getURL(req);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new UserServiceImpl().sendMessage(2, urlMessage, VerifyUtil.getEmail());
-            }
-        }).start();
+        String urlMessage = getURL();
+        new UserServiceImpl().sendMessage(2, urlMessage, VerifyUtil.getEmail());
         req.setAttribute("email", VerifyUtil.getEmail());
         req.getRequestDispatcher("/jsp/active.jsp").forward(req, resp);
     }
 
-    private String getURL(HttpServletRequest req) throws IOException {
+    private String getURL() throws IOException {
         String email = "email=" + VerifyUtil.getEmail();
         String activationCode = "key=" + VerifyUtil.getActivationCode();
-//        Document document= Jsoup.connect("http://www.ip.cn/").userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0")
-//                .timeout(5000).get();
-//        Element element=document.select("code").first();
-//        String ip= element.text();
-        String ip=req.getLocalAddr();
+        Document document = Jsoup.connect("http://ip.chinaz.com/siteip").userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0")
+                .get();
+        Element element = document.select("dd").first();
+        String ip = element.text();
+//        String ip=req.getLocalAddr();
         //拼接url
         StringBuilder url = new StringBuilder();
         url.append("http://");
         url.append(ip);
-        url.append("/activeAccount?");
+        url.append("/ws/activeAccount?");
         url.append(email);
         url.append("&");
         url.append(activationCode);

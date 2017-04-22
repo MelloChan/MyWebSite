@@ -9,7 +9,7 @@ import java.util.Properties;
 
 /**
  * Created by Administrator on 2017/3/7.
- * c3p0连接池
+ * c3p0连接池 单例饿汉模式
  */
 public class ConnectionFactory {
     private static ComboPooledDataSource cpds = new ComboPooledDataSource();
@@ -48,6 +48,8 @@ public class ConnectionFactory {
             cpds.setMaxStatements(Integer.parseInt(properties.getProperty("maxStatements")));
             //等待时间
             cpds.setCheckoutTimeout(Integer.parseInt(properties.getProperty("maxTimeout")));
+            //每5小时检查空闲连接
+            cpds.setIdleConnectionTestPeriod(18000);
 
         } catch (PropertyVetoException e) {
             System.out.println("配置异常:" + e.getMessage());
@@ -58,9 +60,4 @@ public class ConnectionFactory {
         return cpds.getConnection();
     }
 
-    public static void main(String[] args) throws SQLException {
-        ConnectionFactory cf = ConnectionFactory.getInstance();
-        Connection connection = cf.getConnection();
-        System.out.println(connection.getAutoCommit());
-    }
 }

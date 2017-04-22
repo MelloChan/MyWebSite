@@ -1,15 +1,12 @@
-﻿package com.mello.dao.impl;
+package com.mello.dao.impl;
 
 import com.mello.dao.UserDAO;
 import com.mello.entity.User;
-import com.mello.util.ActiveCode;
 import com.mello.util.ConnectionFactory;
 import com.mello.util.VerifyUtil;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.sql.*;
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 /**
  * Created by Administrator on 2017/3/7.
@@ -181,6 +178,4 @@ public class UserDAOImpl implements UserDAO {
     public List<User> userList(int start, int count) throws SQLException {
         return null;
     }
-
-  
 }

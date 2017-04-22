@@ -15,7 +15,7 @@ import java.io.PrintWriter;
  * Created by Administrator on 2017/3/24.
  * 用于激活账户的servlet
  */
-@WebServlet(name = "ActiveAccountServlet", urlPatterns = {"/activeAccount"})
+@WebServlet(name = "ActiveAccountServlet", urlPatterns = {"/ws/activeAccount"})
 public class ActiveAccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

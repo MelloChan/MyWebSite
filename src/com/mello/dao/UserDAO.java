@@ -14,7 +14,7 @@ public interface UserDAO {
     void insert(User user) throws SQLException;
 
     void update(User user) throws SQLException;
-    void updateStatus(Integer id,String activation,String activationCode)throws SQLException;
+    void updateStatus(Integer id, String activation, String activationCode)throws SQLException;
 
     Boolean delete(Integer id) throws SQLException;
 

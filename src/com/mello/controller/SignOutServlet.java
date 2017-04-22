@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by Administrator on 2017/2/27.
  */
-@WebServlet(name = "SignOutServlet", urlPatterns = {"/signOut"})
+@WebServlet(name = "SignOutServlet", urlPatterns = {"/ws/signOut"})
 public class SignOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,7 +24,7 @@ public class SignOutServlet extends HttpServlet {
         resp.addHeader("Pragma", "no-cache");
         resp.setHeader("Cache-Control", "no-cache");
         resp.setHeader("Expires", "0");
-        resp.sendRedirect("/index.html");
+        resp.sendRedirect("/");
     }
 
     @Override

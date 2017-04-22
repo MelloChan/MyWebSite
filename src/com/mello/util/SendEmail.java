@@ -1,9 +1,12 @@
-﻿package com.mello.util;
+package com.mello.util;
 
 import com.sun.mail.util.MailSSLSocketFactory;
 
 import javax.mail.*;
-import javax.mail.internet.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,13 +14,16 @@ import java.util.Properties;
 
 /**
  * Created by Administrator on 2017/3/4.
+ * 发送邮件的工具类【文本或HTML】
  */
-public class SendEmail {
+public class SendEmail{
     private static final String smtp = "";
     private static final String serverMail = "";
     private static final String serverPassword = "";
     private static final String myEmail = "";
     private static final Map<Integer, String> TITLE = new HashMap<>();
+
+    private SendEmail(){}
 
     private static Session config() throws GeneralSecurityException {
         TITLE.put(1, "你有一条新留言");

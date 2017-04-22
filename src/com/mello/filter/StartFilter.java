@@ -1,51 +1,44 @@
 package com.mello.filter;
 
-import com.mello.listener.SessionListener;
-import com.mello.util.VerifyUtil;
-import org.java_websocket.WebSocketImpl;
-import com.mello.controller.WebSocket;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2016/11/20.
+ * 编码设置
  */
 @WebFilter(filterName = "StartFilter", urlPatterns = {"/*"})
 public class StartFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         System.out.println("StartFilter Init!");
-        this.startWebSocketOnline();  //通过过滤器 先构建 调用在线人数统计~
     }
-
-    public void startWebSocketOnline() {
-        System.out.println("开始启动WebSocket");
-        WebSocketImpl.DEBUG = false;
-        int port = 8888;
-        WebSocket s;
-        try {
-            s = new WebSocket(port);
-            s.start();
-        } catch (UnknownHostException e) {
-            System.out.println("启动失败！");
-            e.printStackTrace();
-        }
-        System.out.println("启动成功!");
-    }
-
     @Override
     public void destroy() {
         System.out.println("StartFilter Destroy!");
     }
 
+    /**
+     * 一个总的验证路由 统一设置全局请求编码为 UTF-8
+     * @param servletRequest  请求头
+     * @param servletResponse 响应头
+     * @param filterChain 过滤链
+     * @throws IOException IO流异常
+     * @throws ServletException servlet异常
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        request.setCharacterEncoding("utf-8");
+        request.setCharacterEncoding("UTF-8");
+        //打印过滤至此的时间
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+        String date=simpleDateFormat.format(new Date());
+        System.out.println(date+" Start Filter");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

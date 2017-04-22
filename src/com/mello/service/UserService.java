@@ -4,7 +4,7 @@ import com.mello.entity.User;
 
 /**
  * Created by Administrator on 2017/2/26.
- * 用户行为的增删改查
+ * 用户行为的增删改查服务
  */
 public interface UserService {
     Boolean register(User user);

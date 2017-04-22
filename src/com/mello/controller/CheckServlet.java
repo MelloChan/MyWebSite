@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  * Created by Administrator on 2017/3/2.
  * 验证注册邮箱的唯一性
  */
-@WebServlet(name = "CheckServlet", urlPatterns = {"/check"})
+@WebServlet(name = "CheckServlet", urlPatterns = {"/ws/check"})
 public class CheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

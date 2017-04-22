@@ -11,21 +11,17 @@ import java.io.IOException;
 
 /**
  * Created by Administrator on 2017/3/4.
+ * 接收匿名邮件发送到我的163邮箱
  */
-@WebServlet(name = "GetMessageServlet", urlPatterns = {"/message"})
+@WebServlet(name = "GetMessageServlet", urlPatterns = {"/ws/message"})
 public class GetMessageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String ip = req.getRemoteAddr();
         String message = req.getParameter("message");
         if (message != null) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    new UserServiceImpl().sendMessage(1, ip + ":" + message);
-                }
-            }).start();
-            req.getRequestDispatcher("/index.html").forward(req, resp);
+           new UserServiceImpl().sendMessage(1, ip + ":" + message);
+            resp.sendRedirect("/");
         }
     }
 

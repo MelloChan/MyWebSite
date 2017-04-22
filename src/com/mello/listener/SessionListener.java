@@ -11,6 +11,7 @@ import java.util.Set;
 
 /**
  * Created by Administrator on 2017/3/12.
+ * 监听个人聊天室session
  */
 @WebListener(value = "监听session并记录为Hash表")
 public class SessionListener implements HttpSessionListener {

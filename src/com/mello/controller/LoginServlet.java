@@ -19,7 +19,7 @@ import java.io.UnsupportedEncodingException;
  * Created by Administrator on 2017/2/26.
  * 用于验证用户登录
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
+@WebServlet(name = "LoginServlet", urlPatterns = {"/ws/login"})
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("/html/active.html").forward(req,resp);
             return;
         }
-        boolean flag = verifyUser(req, resp);
+        boolean flag = verifyUser(req);
         if (flag) {
             resp.sendRedirect("/main/html/main.html");
             return;
@@ -44,12 +44,11 @@ public class LoginServlet extends HttpServlet {
     /**
      * 验证用户账户信息 获取成功设置相应的唯一session
      *
-     * @param request
-     * @param response
+     * @param request 请求参数
      * @return 当存在该用户时返回真 当用户不存在时返回假，用户重复登录时跳转回聊天主页面
      * @throws UnsupportedEncodingException
      */
-    private Boolean verifyUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private Boolean verifyUser(HttpServletRequest request) throws IOException {
         User user = getUserInfo(request);
         if (user == null) {
             return false;
@@ -60,15 +59,14 @@ public class LoginServlet extends HttpServlet {
         if (flag) {
             user.setUsername(VerifyUtil.getUsername());
             HttpSession session = request.getSession();
-            session.setAttribute(email, user);
-            SessionListener.addUser(email, (User) session.getAttribute(email));
+            session.setAttribute("user",user);
+            SessionListener.addUser(email,user);
         }
         return flag;
     }
 
     /**
      * 组装返回用户实例
-     *
      * @param request
      * @return 当用户未在session时返回User对象，否则返回null
      * @throws UnsupportedEncodingException

@@ -17,10 +17,9 @@ public class ImageProtectorFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-
+        System.out.println("Image Filter");
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         String referrer = httpServletRequest.getHeader("referer");
-        System.out.println("referrer:" + referrer);
         if (referrer != null)
             filterChain.doFilter(servletRequest, servletResponse);
         else {
