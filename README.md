@@ -10,7 +10,8 @@ www.melloyuki.cn
 前端栈:html/css/js/jQuery/ajax
 
 #后端框架
-暂时在理解原理中,并不想用.
+该项目使用原生servlet
+
 
 
 
