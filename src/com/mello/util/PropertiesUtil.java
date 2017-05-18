@@ -1,9 +1,9 @@
-package com.mello.util;
+﻿package com.mello.util;
 
 import java.util.Properties;
 
 /**
- * Created by Administrator on 2017/4/20.
+ * Created by Administrator on 2017/4/10.
  * 配置文件工具类
  */
 public class PropertiesUtil {

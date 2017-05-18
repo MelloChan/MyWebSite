@@ -1,4 +1,4 @@
-package com.mello.util;
+﻿package com.mello.util;
 
 
 
@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Created by Administrator on 2017/4/16.
+ * Created by Administrator on 2017/3/16.
  * 获取本地时间类工具
  */
 public class TimeUtil {
