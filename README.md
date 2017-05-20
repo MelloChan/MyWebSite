@@ -18,6 +18,9 @@ www.melloyuki.cn
 #个人站点  
 #微信教务接口:2017/4/xx 暂不提供源码,需要请私聊  
 #现:等大创搞定后,完善      
+#新增spring-boot功能demo演示 
+http://www.melloyuki.cn:9999/api/city    
+http://www.melloyuki.cn:9090/action.html   
 #计划:留言板 && 写一些本地与服务器上环境搭建的教程文章
 
 

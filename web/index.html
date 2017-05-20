@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <base target="_blank" />
     <meta name="keywords" content="技术,音乐,小说,ACG,与你分享"/>
     <meta charset="UTF-8">
-    <meta http-equiv="pragma" content="no-cache"> <!--阻止脱机浏览-->
-    <meta http-equiv="cache-control" content="no-cache"> <!--//缓存清除-->
-    <meta http-equiv="expires" content="0">
     <link type="text/css" rel="stylesheet" href="css/all.css" media="screen"/>
     <script type="text/javascript" src="js/jquery/2.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
@@ -18,9 +15,11 @@
     <div class="header">
         <span class="tagline"><a href="/html/login.html" title="点击登录">登录&ensp;</a></span>
         <span class="tagline"><a href="/html/register.html" title="点击注册">&ensp;注册&ensp;</a></span>
-        <span class="tagline"><a href="/jwxt/login.html" title="成绩、课表、考试时间查询">&ensp;&ensp;教务功能&ensp;</a></span>
-        <span class="tagline"><a href="http://mellochan.github.io/html/index.html" title="我的博客">&ensp;我的博客&ensp;</a></span>
-        <span class="tagline"><a href="/main/html/main.html" title="聊天室">&ensp;聊天室&ensp;</a></span>
+        <span class="tagline"><a href="/jwxt/login.html" title="成绩、课表、考试时间查询接口[demo]">&ensp;&ensp;教务功能&ensp;</a></span>
+        <span class="tagline"><a href="https://mellochan.github.io/" title="我的博客[暂时没有什么]">&ensp;我的博客&ensp;</a></span>
+        <span class="tagline"><a href="/main/html/main.html" title="基于WebSocket的简易demo">&ensp;聊天室&ensp;</a></span>
+        <span class="tagline"><a href="http://www.melloyuki.cn:9999/api/city" title="nginx+tomcat+spring-boot起步+RESTful">&ensp;spring-boot&ensp;</a></span>
+        <span class="tagline"><a href="http://www.melloyuki.cn:9090/action.html" title="nginx+tomcat+spring-boot+spa">&ensp;spring-boot实战&ensp;</a></span>
         <span class="tagline"><a href="#" title="个人简历[待完善]">&ensp;自白&ensp;</a></span>
     </div>
     <div id="cardstyle">
@@ -41,10 +40,11 @@
                     <li id="bio" class="section">
                         <h2>关于我</h2>
                         <img class="left" src="images/me.jpg" alt="Sample photo"/>
-                        <p>姓名:陈文铭[Mello]</p>
-                        <p>理想:当一名安安静静的JavaWeb后端工程师.</p>
+                        <p>姓名:陈文铭[MelloChan]</p>
+                        <p>理想:当一名安安静静的JavaWeb程序员.</p>
                         <p>目标:家人、技术、音乐、小说、ACG.</p>
                         <p>现实:或许很难,但我在路上,在努力.</p>
+                        <p>观点:技术即自由与分享,愿与阁下互相学习交流[QQ:352983198],共勉.</p>
                         <a href="html/message.html" title="点我:测试用例"><p>匿名留个言呗</p></a>
                     </li>
 
@@ -69,7 +69,7 @@
                             <li><a href="http://www.oschina.net/" title="开源中国"><img src="images/icons/osChina.png">
                                 <strong>开源中国</strong>
                             </a></li>
-                            <li>
+                              <li>
                                 <strong>当然，还有很多技术分享社区值得你去浏览.....</strong>
                             </li>
                         </ul>
@@ -78,13 +78,19 @@
                     <li id="music" class="section">
                         <h2>音乐</h2>
                         <ul>
-
+						<li><strong>小学初中一直喜欢着许嵩</strong></li>
+						<li><strong>上了高中大学后,逐渐只喜欢听纯音,或电影/ACG原生歌曲,总觉得已经跟不上主流音乐了[话说也不想就是了]......</strong></li>
                         </ul>
                     </li>
 
                     <li id="novel" class="section">
-                        <h2>小说</h2>
-
+                        <h2>小说/漫画</h2>
+						<ul>
+						<li><strong>小说看得最疯的应该是初中,那时候很喜欢看小白文,还有什么黑道文等[例如作者:我爱吃西红柿/烽火戏诸侯/野狐/跳舞等],熬夜看完盗墓笔记/鬼吹灯等</strong></li>
+						<li><strong>漫画小学就开始看了,因为老姐买了很多漫画,后来开始在电脑上看,嗯,其实相比其他,漫画反而是我看最多的,就不列了[本命漫画:死亡笔记;本命作者:clamp],有兴趣一起交流~</strong></li>	
+						<li><strong>高中后,就很少接触网络小说了,开始接触名著,不过现在印象还很深的也就只有 百年孤独/肖申克的救赎了.还有东野圭吾的白夜行/幻夜/嫌疑人X的献身等</strong></li>
+						<li><strong>漫画应该是最长久的,现在闲下来都会看......</strong></li>
+						</ul>
                     </li>
 
                     <li id="ACG" class="section">
@@ -103,11 +109,12 @@
                     <li id="start" class="section">
                         <h2>结语</h2>
                         <img class="left" src="images/me.jpg" alt="Sample photo"/>
-                        <p class="tagline">此刻,愿能与你分享,共同的爱好.</p><br><br><br>
-                        <p class="tagline"><a href="html/login.html" title="点击登录">登录</a></p>
-                        <p class="tagline">Or</p>
-                        <p class="tagline"><a href="html/register.html" title="点击注册">注册</a></p>
-
+                      <p>心路历程:</p> 
+                        <p>大一:手捧着C Primer Plus,完整的敲完了一段段代码.有些累,但每当解决一个问题,成就感确实MAX.然后除了课程外又看完了计算机科学概论/编码的奥秘等
+						.后来,接触了Python/github/C++/Java/还有学校一堆课程计组/数据结构/等.暑假,开始接触了安卓,自学一个月,不对胃口,弃之.转Web,又学了半个月前端,之后逐渐接触了JavaWeb.</p>
+						 <p>大二:适时,迎来课程三巨头:算法/数据库/操作系统.不过,最终还是学完了servlet/jsp以及服务器[web服务器/应用服务器]相关等.用原生写了基本demo以及教务爬虫接口.
+						如今:琢磨着基础及框架原理/设计模式的同时,正着手学习spring-boot[打算应用在大创]</p>
+						 <p>半程总结:前期广泛了解各方面知识很重要,但找到方向就要专注[继续保持对技术发展的好奇与了解];学校的书大都很差,为了考试可随意,真心学还是得看国外书比较妥当;陆陆续续也看了不少纸质书/电子书[虽然很多没看完],但收获很多.有空整理一个书单,也给自己理理思路...</p>
                     </li>
                 </ul>
             </div>
@@ -116,22 +123,15 @@
     </div>
 
 </div>
-<!--<div style="display: none">-->
-<!--音频-->
-    <!--<audio controls autoplay >-->
-        <!--<source src="audio/Top%20of%20the%20world.mp3">-->
-        <!--<source src="audio/I%20Am%20Not%20Alone.mp3">-->
-    <!--</audio>-->
-<!--</div>-->
-<!--<script type="text/javascript">-->
-    <!--$("#poptroxactive").each(function() {-->
-        <!--$(this).poptrox();-->
-    <!--});-->
-<!--</script>-->
+
+<div id="footer">
+   Copyright &copy; 2016-2017 MelloChan
+</div>
+
 <script type="application/javascript">
-    var vList = ['video/Dream.mp4', 'video/LoveYou.mp4', 'video/Memory.mp4']; // 初始化播放列表
-    var vLen = vList.length; // 播放列表的长度
-    var curr = 0; // 当前播放的视频
+    var vList = ['video/Dream.mp4', 'video/LoveYou.mp4', 'video/Memory.mp4']; 
+    var vLen = vList.length; 
+    var curr = 0; 
     var video = document.getElementById("animation");
     video.addEventListener('ended', play);
     play();
@@ -141,7 +141,7 @@
         video.play();
         curr++;
         if(curr >= vLen){
-            curr = 0; // 播放完了，重新播放
+            curr = 0; 
         }
 
     }
