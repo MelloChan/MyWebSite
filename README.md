@@ -21,6 +21,7 @@ www.melloyuki.cn
 #新增spring-boot功能demo演示 
 http://www.melloyuki.cn:9999/api/city    
 http://www.melloyuki.cn:9090/action.html   
-#计划:留言板 && 写一些本地与服务器上环境搭建的教程文章
+#新增 留言板
+#计划:写一些本地与服务器上环境搭建的教程文章
 
 
