@@ -1,7 +1,6 @@
 ﻿# My WebSite v1.0
 #个人站点【待完善】
-www.melloyuki.cn
-
+www.melloyuki.cn[近期可能访问不了请直接:123.207.121.122]      
 #搭建环境
 服务器:腾讯云centos 6.4
 数据库:mysql 5.1
@@ -18,9 +17,7 @@ www.melloyuki.cn
 #个人站点  
 #微信教务接口:2017/4/xx 暂不提供源码,需要请私聊  
 #现:等大创搞定后,完善      
-#新增spring-boot功能demo演示 
-http://www.melloyuki.cn:9999/api/city    
-http://www.melloyuki.cn:9090/action.html   
+#新增 spring-boot框架demo演示   
 #新增 留言板
 #计划:写一些本地与服务器上环境搭建的教程文章
 
