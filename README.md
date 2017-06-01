@@ -1,6 +1,6 @@
 ﻿# My WebSite v1.0
 #个人站点【待完善】
-www.melloyuki.cn[近期可能访问不了请直接:123.207.121.122]      
+www.melloyuki.cn  
 #搭建环境
 服务器:腾讯云centos 6.4
 数据库:mysql 5.1
