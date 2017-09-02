@@ -1,6 +1,6 @@
 ﻿# My WebSite v1.0
 #个人站点【待完善,待优化,拖延ing】
-www.melloyuki.cn 123.207.121.122  
+https://www.melloyuki.cn/  
 #搭建环境  
 服务器:腾讯云centos 6.6
 数据库:mysql 5.1  
