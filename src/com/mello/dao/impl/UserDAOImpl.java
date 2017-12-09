@@ -26,25 +26,26 @@ public class UserDAOImpl implements UserDAO {
     public void insert(User user) throws SQLException {
         String sql = "insert into " + DBT + "(id,username,password,email,registrationTime,ip,activation,activationCode) " +
                 "values(null,?,?,?,?,?,?,?) ";
-        Connection connection = ConnectionFactory.getInstance().getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, user.getUsername());
-        ps.setString(2, user.getPassword());
-        ps.setString(3, user.getEmail());
-        ps.setDate(4, user.getRegistrationTime());
-        ps.setString(5, user.getIp());
-        ps.setString(6,user.getActivation());
-        ps.setString(7, user.getActivationCode());
-        ps.execute();
-        ResultSet rs = ps.getGeneratedKeys();
-        if (null != rs) {
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                user.setId(id);
-                VerifyUtil.setId(user.getId());
-                VerifyUtil.setEmail(user.getEmail());
-                VerifyUtil.setActivation(user.getActivation());
-                VerifyUtil.setActivationCode(user.getActivationCode());
+        try(Connection connection = ConnectionFactory.getInstance()) {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getEmail());
+            ps.setDate(4, user.getRegistrationTime());
+            ps.setString(5, user.getIp());
+            ps.setString(6,user.getActivation());
+            ps.setString(7, user.getActivationCode());
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (null != rs) {
+                while (rs.next()) {
+                    int id = rs.getInt(1);
+                    user.setId(id);
+                    VerifyUtil.setId(user.getId());
+                    VerifyUtil.setEmail(user.getEmail());
+                    VerifyUtil.setActivation(user.getActivation());
+                    VerifyUtil.setActivationCode(user.getActivationCode());
+                }
             }
         }
     }
@@ -62,12 +63,13 @@ public class UserDAOImpl implements UserDAO {
         String password = user.getPassword();
         Integer id = user.getId();
         String sql = "update " + DBT + " set username=?,password=? where id=? ";
-        Connection connection = ConnectionFactory.getInstance().getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, username);
-        ps.setString(2, password);
-        ps.setInt(3, id);
-        ps.execute();
+        try( Connection connection = ConnectionFactory.getInstance()) {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setInt(3, id);
+            ps.execute();
+        }
     }
 
     /**
@@ -80,12 +82,13 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void updateStatus(Integer id,String activation,String activationCode)throws SQLException{
         String sql="update "+DBT+" set activation=?,activationCode=? where id=? ";
-        Connection connection=ConnectionFactory.getInstance().getConnection();
-        PreparedStatement ps=connection.prepareStatement(sql);
-        ps.setString(1,activation);
-        ps.setString(2,activationCode);
-        ps.setInt(3,id);
-        ps.execute();
+        try( Connection connection=ConnectionFactory.getInstance()) {
+            PreparedStatement ps=connection.prepareStatement(sql);
+            ps.setString(1,activation);
+            ps.setString(2,activationCode);
+            ps.setInt(3,id);
+            ps.execute();
+        }
     }
 
     /**
@@ -111,26 +114,27 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User search(String email, String password) throws SQLException {
         String sql = " select id,username,password,email,registrationTime,ip from " + DBT + " where email=? and password=? ";
-        Connection connection = ConnectionFactory.getInstance().getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, email);
-        ps.setString(2, password);
-        ResultSet rs = ps.executeQuery();
-        User user = null;
-        while (rs.next()) {
-            user = new User();
-            int id = rs.getInt(1);
-            user.setId(id);
-            user.setUsername(rs.getString(2));
-            user.setPassword(rs.getString(3));
-            user.setEmail(rs.getString(4));
-            user.setRegistrationTime(rs.getDate(5));
-            user.setIp(rs.getString(6));
-            VerifyUtil.setId(rs.getInt(1));
-            VerifyUtil.setEmail(user.getEmail());
-            VerifyUtil.setUsername(user.getUsername());
+        try (Connection connection = ConnectionFactory.getInstance()){
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            User user = null;
+            while (rs.next()) {
+                user = new User();
+                int id = rs.getInt(1);
+                user.setId(id);
+                user.setUsername(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                user.setEmail(rs.getString(4));
+                user.setRegistrationTime(rs.getDate(5));
+                user.setIp(rs.getString(6));
+                VerifyUtil.setId(rs.getInt(1));
+                VerifyUtil.setEmail(user.getEmail());
+                VerifyUtil.setUsername(user.getUsername());
+            }
+            return user;
         }
-        return user;
     }
 
     /**
@@ -141,18 +145,18 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User search(String email) throws SQLException {
         String sql = " select username,email from " + DBT + " where email=? ";
-        Connection connection = ConnectionFactory.getInstance().getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, email);
-        ResultSet rs = ps.executeQuery();
-        User user = null;
-        while (rs.next()) {
-            user = new User();
-            user.setUsername(rs.getString(1));
-            user.setEmail(rs.getString(2));
-
+        try(Connection connection = ConnectionFactory.getInstance()) {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            User user = null;
+            while (rs.next()) {
+                user = new User();
+                user.setUsername(rs.getString(1));
+                user.setEmail(rs.getString(2));
+            }
+            return user;
         }
-        return user;
     }
 
     /**

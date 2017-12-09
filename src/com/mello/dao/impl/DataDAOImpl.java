@@ -17,12 +17,13 @@ public class DataDAOImpl implements DataDAO {
     @Override
     public Boolean insert(Data data) throws SQLException {
         String sql = "insert into " + DBT + "(id,message,email,ip,date)values(null,?,?,?,?)";
-        Connection connection = ConnectionFactory.getInstance().getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, data.getMessage());
-        ps.setString(2, data.getEmail());
-        ps.setString(3, data.getIp());
-        ps.setDate(4, data.getDate());
-        return ps.execute();
+        try(Connection connection = ConnectionFactory.getInstance()) {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, data.getMessage());
+            ps.setString(2, data.getEmail());
+            ps.setString(3, data.getIp());
+            ps.setDate(4, data.getDate());
+            return ps.execute();
+        }
     }
 }

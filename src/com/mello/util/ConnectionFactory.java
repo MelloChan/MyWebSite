@@ -18,8 +18,8 @@ public class ConnectionFactory {
     private ConnectionFactory() {
     }
 
-    public static ConnectionFactory getInstance() {
-        return cf;
+    public static Connection getInstance() throws SQLException {
+        return cf.getConnection();
     }
 
     static {
@@ -56,7 +56,7 @@ public class ConnectionFactory {
         }
     }
 
-    public synchronized Connection getConnection() throws SQLException {
+    private synchronized Connection getConnection() throws SQLException {
         return cpds.getConnection();
     }
 
